@@ -20,3 +20,8 @@ login: admin@admin.com
 pw: qweqwe
 
 #### To get to admin panel please add '/admin' to home url (without quotes)
+
+### console command to send money
+```
+php /path/to/prroject artisann money:send
+```

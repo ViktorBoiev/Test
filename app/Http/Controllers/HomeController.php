@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\StripeHelper;
+use App\Helpers\PaypalHelper;
 use App\Models\BaseConfig;
 use App\Models\Gift;
 use App\Models\WinnerLog;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    use StripeHelper;
+    use PaypalHelper;
     /**
      * Show the application dashboard.
      *

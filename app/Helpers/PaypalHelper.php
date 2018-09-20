@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 
-trait StripeHelper
+trait PaypalHelper
 {
     protected $url = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
 
