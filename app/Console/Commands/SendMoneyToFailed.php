@@ -43,8 +43,8 @@ class SendMoneyToFailed extends Command
         $moneyWins = WinnerLog::whereIn('status', [WinnerLog::STATUS_ERROR, WinnerLog::STATUS_PENDING])
             ->where('win_type', WinnerLog::TYPE_MONEY)
             ->with('winner')
-            ->limit(env('SEND_MONEY_CONSOLE_LIMIT', 10));
-
+            ->limit(env('SEND_MONEY_CONSOLE_LIMIT', 10))
+            ->get();
         foreach($moneyWins as $win) {
             $data = $this->makePay($win->winner->email, $win->quantity);
             $win->status = WinnerLog::STATUS_ACCEPTED;
