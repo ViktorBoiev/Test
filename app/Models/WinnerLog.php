@@ -42,6 +42,14 @@ class WinnerLog extends Model
     const STATUS_CONVERTED_TO_LOYALTY = 6;
     const STATUS_ERROR = 7;
 
+    protected $fillable = [
+        'winner_id',
+        'win_type',
+        'status',
+        'win_quantity',
+        'gift_type'
+    ];
+
     public function winner()
     {
         return $this->belongsTo(User::class, 'winner_id');

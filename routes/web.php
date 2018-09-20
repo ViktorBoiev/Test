@@ -28,4 +28,17 @@ Route::middleware(['auth'])->group(function() {
         'uses' => 'HomeController@prize',
         'as' => 'prize.generate',
     ]);
+
+    Route::post('lottery/prize/accept', [
+        'uses' => 'HomeController@acceptPrize',
+        'as' => 'prize.accept',
+    ]);
+    Route::post('lottery/prize/decline', [
+        'uses' => 'HomeController@declinePrize',
+        'as' => 'prize.decline',
+    ]);
+    Route::post('lottery/prize/convert', [
+        'uses' => 'HomeController@convertPrize',
+        'as' => 'prize.convert',
+    ]);
 });

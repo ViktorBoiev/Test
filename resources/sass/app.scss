@@ -36,6 +36,14 @@
   }
 }
 
+.modal-content {
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
 .preloader {
   position: absolute;
   top: 0;

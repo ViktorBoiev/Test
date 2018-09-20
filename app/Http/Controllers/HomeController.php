@@ -36,15 +36,16 @@ class HomeController extends Controller
         ];
 
         $totalWins = WinnerLog::where('win_type',WinnerLog::TYPE_MONEY)
-            ->whereIn('win_status', [WinnerLog::STATUS_PENDING, WinnerLog::STATUS_ACCEPTED])  //where user accepted or not choose yet
+            ->whereIn('status', [WinnerLog::STATUS_PENDING, WinnerLog::STATUS_ACCEPTED])  //where user accepted or not choose yet
             ->sum('win_quantity');
 
         //defining if there is a chance to win money
-        if ($totalWins < BaseConfig::MONEY_WIN_LIMIT) {
+        if ($totalWins < BaseConfig::where('key', BaseConfig::MONEY_WIN_LIMIT)->first()->value) {
             $prizes[] = WinnerLog::TYPE_MONEY;
         }
 
         $prize = array_rand($prizes);
+        $prize = $prizes[$prize];
 
         $quantity = 1;
 
@@ -67,7 +68,7 @@ class HomeController extends Controller
         $data = [
             'winner_id' => $user->id,
             'win_type' => $prize,
-            'quantity' => $quantity,
+            'win_quantity' => $quantity,
             'status' => WinnerLog::STATUS_PENDING
         ];
 
@@ -75,10 +76,11 @@ class HomeController extends Controller
             $data['gift_type'] = $giftType;
         }
 
-        WinnerLog::create($data);
+        $log = WinnerLog::create($data);
 
         unset($data['winner_id']);
         unset($data['status']);
+        $data['id'] = $log->id;
 
         return response()->json($data, 200);
     }
