@@ -27,4 +27,9 @@ class BaseConfig extends Model
     const MAX_MONEY_WIN = 'max money win';
     const MONEY_WIN_LIMIT = 'money win limit';
     const CONVERSION_RATIO = 'conversion ratio';
+
+    public function getKeyForFormAttribute()
+    {
+        return str_replace(' ', '_', $this->key);
+    }
 }

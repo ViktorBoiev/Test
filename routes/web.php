@@ -72,10 +72,18 @@ Route::group([
         'uses' => 'Admin\AdminController@usersData',
         'as' => 'users.data'
     ]);
-
     Route::get('users/show/{id}', [
         'uses' => 'Admin\AdminController@showUser',
         'as' => 'users.show'
+    ]);
+
+    Route::get('configs', [
+        'uses' => 'Admin\AdminController@showConfigs',
+        'as' => 'configs.show'
+    ]);
+    Route::put('configs', [
+        'uses' => 'Admin\AdminController@updateConfigs',
+        'as' => 'configs.update'
     ]);
 
 });

@@ -3,3 +3,10 @@
     text-align: right;
   }
 }
+input.is-invalid {
+  border: 1px solid red;
+}
+
+input.is-invalid + .invalid-feedback {
+  color: red;
+}

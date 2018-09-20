@@ -112,19 +112,19 @@ return [
         [
             'text' => 'Users',
             'url'  => 'admin/users',
-            'icon' => 'user',
+            'icon' => 'users',
         ],
 
         [
             'text' => 'Winner Logs',
             'url'  => 'admin/users',
-            'icon' => 'user',
+            'icon' => 'list-alt',
         ],
 
         [
             'text' => 'Configs',
-            'url'  => 'admin/users',
-            'icon' => 'user',
+            'url'  => 'admin/configs',
+            'icon' => 'cogs',
         ],
     ],
 
