@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\StripeHelper;
 use App\Models\BaseConfig;
 use App\Models\Gift;
 use App\Models\WinnerLog;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
+    use StripeHelper;
     /**
      * Show the application dashboard.
      *
@@ -117,6 +118,49 @@ class HomeController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
 
+    public function acceptPrize(Request $request)
+    {
+        $prize = WinnerLog::findOrFail($request->get('id'));
+        $user = \Auth::user();
+
+        if ($prize->winner_id != $user->id) {
+            return response()->json(['status' => 'Wrong request'], 400);
+        }
+
+        switch ($prize->win_type) {
+            case WinnerLog::TYPE_LOYALTY:
+                $user->loyalty_points += $prize->win_quantity;
+                $user->save();
+                $prize->status = WinnerLog::STATUS_ACCEPTED;
+                break;
+
+            case WinnerLog::TYPE_MONEY:
+                $pay = $this->makePay($user->email, $prize->win_quantity);
+                if (!isset($pay['err'])) {
+                    $prize->status = WinnerLog::STATUS_ACCEPTED;
+                } else {
+                    $prize->status = WinnerLog::STATUS_ERROR;
+                    \Log::critical($pay['err']);
+                }
+                break;
+
+            case WinnerLog::TYPE_GIFT:
+                $prize->status = WinnerLog::STATUS_ACCEPTED;
+                $message = 'Be sure you have correct data in preferences to receive your prize!';
+                break;
+        }
+        $prize->save();
+
+        $response = [
+            'status' => 'success'
+        ];
+        if (isset($message)) {
+            $response['message'] = $message;
+        }
+
+        return response()->json($response, 200);
+    }
+
     protected function generateGift()
     {
         $gift = Gift::where('quantity', '>', 0)->inRandomOrder()->first();
@@ -127,4 +171,5 @@ class HomeController extends Controller
 
         return $giftType;
     }
+
 }

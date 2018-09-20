@@ -40,6 +40,7 @@ class WinnerLog extends Model
     const STATUS_SENT = 4;
     const STATUS_RECEIVED = 5;
     const STATUS_CONVERTED_TO_LOYALTY = 6;
+    const STATUS_ERROR = 7;
 
     public function winner()
     {
