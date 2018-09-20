@@ -68,6 +68,18 @@
                                 @endif
                                 </div>
                             </div>
+                                <div class="form-group row">
+                                    <label for="delivery_state" class="col-sm-4 col-form-label">City</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control {{ $errors->has('delivery_state') ? ' is-invalid' : '' }}" name="delivery_state" id="delivery_state"
+                                               value="{{ old('delivery_state') ? old('delivery_state') : $user->preferences->delivery_state}}">
+                                        @if ($errors->has('delivery_state'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('delivery_state') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
                             <div class="form-group row">
                                 <label for="delivery_zip" class="col-sm-4 col-form-label">Zip</label>
                                 <div class="col-sm-8">

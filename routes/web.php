@@ -53,3 +53,29 @@ Route::middleware(['auth'])->group(function() {
     ]);
 
 });
+
+Route::group([
+    'middleware' => ['auth', 'role:admin'],
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function() {
+    Route::get('/', [
+        'uses' => 'Admin\AdminController@index',
+        'as' => 'dashboard'
+    ]);
+
+    Route::get('users', [
+        'uses' => 'Admin\AdminController@getUsers',
+        'as' => 'users.index'
+    ]);
+    Route::get('users/data', [
+        'uses' => 'Admin\AdminController@usersData',
+        'as' => 'users.data'
+    ]);
+
+    Route::get('users/show/{id}', [
+        'uses' => 'Admin\AdminController@showUser',
+        'as' => 'users.show'
+    ]);
+
+});
