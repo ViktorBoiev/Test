@@ -94,6 +94,28 @@ Route::group([
         'as' => 'logs.update'
     ]);
 
+    Route::get('gifts', [
+        'uses' => 'Admin\AdminController@getGifts',
+        'as' => 'gifts.index'
+    ]);
+    Route::get('gifts/data', [
+        'uses' => 'Admin\AdminController@giftsData',
+        'as' => 'gifts.data'
+    ]);
+    Route::get('gifts/show/{id}', [
+        'uses' => 'Admin\AdminController@showGift',
+        'as' => 'gifts.show'
+    ]);
+
+    Route::get('gifts/create', [
+        'uses' => 'Admin\AdminController@createGift',
+        'as' => 'gifts.create'
+    ]);
+    Route::post('gifts/store/{id?}', [
+        'uses' => 'Admin\AdminController@storeGift',
+        'as' => 'gifts.store'
+    ]);
+
     Route::get('configs', [
         'uses' => 'Admin\AdminController@showConfigs',
         'as' => 'configs.show'

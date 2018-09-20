@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\BaseConfig;
+use App\Models\Gift;
 use App\Models\WinnerLog;
 use App\User;
 use Illuminate\Http\Request;
@@ -78,6 +79,58 @@ class AdminController extends Controller
             ->with('status', 'Success!');
     }
 
+    public function getGifts()
+    {
+        return view('admin.gifts.index');
+    }
+    public function createGift()
+    {
+        return view('admin.gifts.create');
+    }
+
+    public function giftsData()
+    {
+        return \DataTables::of(Gift::query())
+            ->addColumn('action', function ($gift) {
+                return '<a href="'.route('admin.gifts.show', $gift->id).'" class="btn btn-info">Details</a>';
+            })
+            ->make(true);
+    }
+
+    public function showGift($id)
+    {
+        $gift = Gift::findOrFail($id);
+        return view('admin.gifts.show', compact('gift'));
+    }
+
+    public function storeGift(Request $request, $id = null)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|string|min:3',
+            'quantity' => 'required|numeric|min:0'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput();
+        }
+
+        if ($id) {
+            $gift = Gift::findOrFail($id);
+        } else {
+            $gift = new Gift();
+        }
+
+        $gift->name = $request->get('name');
+        $gift->quantity = $request->get('quantity');
+        $gift->save();
+
+        return redirect()
+            ->back()
+            ->with('status', 'Success!');
+    }
 
     public function showConfigs()
     {

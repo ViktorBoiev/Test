@@ -122,6 +122,12 @@ return [
         ],
 
         [
+            'text' => 'Gifts',
+            'url'  => 'admin/gifts',
+            'icon' => 'gift',
+        ],
+
+        [
             'text' => 'Configs',
             'url'  => 'admin/configs',
             'icon' => 'cogs',

@@ -94,7 +94,14 @@ class HomeController extends Controller
             return response()->json(['status' => 'Wrong request'], 400);
         }
 
-        $prize->status = WinnerLog::STATUS_DECLINED;
+        if ($prize->gift_type) {
+            $gift = Gift::where('name', $prize->gift_type)->first();
+
+            $gift->quantity ++;
+            $gift->save();
+        }
+
+        $prize->status = WinnesrLog::STATUS_DECLINED;
         $prize->save();
         return response()->json(['status' => 'success'], 200);
     }
