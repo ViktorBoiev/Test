@@ -16,13 +16,13 @@ class CreateUserPreferencesTable extends Migration
         Schema::create('user_preferences', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->string('delivery_country');
-            $table->string('delivery_city');
+            $table->string('delivery_country')->nullable();
+            $table->string('delivery_city')->nullable();
             $table->string('delivery_state')->nullable();
-            $table->string('delivery_zip');
-            $table->string('delivery_street');
-            $table->string('delivery_building');
-            $table->string('delivery_apartment');
+            $table->string('delivery_zip')->nullable();
+            $table->string('delivery_street')->nullable();
+            $table->string('delivery_building')->nullable();
+            $table->string('delivery_apartment')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

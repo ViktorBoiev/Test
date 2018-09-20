@@ -37,6 +37,17 @@ class UserPreferences extends Model
 {
     protected $table = 'user_preferences';
 
+    protected $fillable = [
+        'user_id',
+        'delivery_country',
+        'delivery_city',
+        'delivery_state',
+        'delivery_zip',
+        'delivery_street',
+        'delivery_building',
+        'delivery_apartment',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

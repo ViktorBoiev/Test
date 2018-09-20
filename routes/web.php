@@ -41,4 +41,15 @@ Route::middleware(['auth'])->group(function() {
         'uses' => 'HomeController@convertPrize',
         'as' => 'prize.convert',
     ]);
+
+    Route::get('preferences', [
+        'uses' => 'UserController@showPreferences',
+        'as' => 'preferences'
+    ]);
+
+    Route::put('preferences', [
+        'uses' => 'UserController@updatePreferences',
+        'as' => 'preferences.update'
+    ]);
+
 });
