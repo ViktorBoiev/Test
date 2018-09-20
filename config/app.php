@@ -211,7 +211,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'DataTables' => Yajra\Datatables\Facades\DataTables::class,
     ],
 
 ];

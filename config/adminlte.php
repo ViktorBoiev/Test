@@ -117,7 +117,7 @@ return [
 
         [
             'text' => 'Winner Logs',
-            'url'  => 'admin/users',
+            'url'  => 'admin/logs',
             'icon' => 'list-alt',
         ],
 

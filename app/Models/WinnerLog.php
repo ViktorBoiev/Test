@@ -42,6 +42,17 @@ class WinnerLog extends Model
     const STATUS_CONVERTED_TO_LOYALTY = 6;
     const STATUS_ERROR = 7;
 
+    const ARRAY_OF_STATUSES = [
+        self::STATUS_PENDING => 'Pending',
+        self::STATUS_DECLINED => 'Declined',
+        self::STATUS_ACCEPTED => 'Accepted',
+        self::STATUS_PREPARING => 'Preparing',
+        self::STATUS_SENT => 'Sent',
+        self::STATUS_RECEIVED => 'Received',
+        self::STATUS_CONVERTED_TO_LOYALTY => 'Converted',
+        self::STATUS_ERROR => 'Error',
+    ];
+
     protected $fillable = [
         'winner_id',
         'win_type',

@@ -77,6 +77,23 @@ Route::group([
         'as' => 'users.show'
     ]);
 
+    Route::get('logs', [
+        'uses' => 'Admin\AdminController@getLogs',
+        'as' => 'logs.index'
+    ]);
+    Route::get('logs/data', [
+        'uses' => 'Admin\AdminController@logsData',
+        'as' => 'logs.data'
+    ]);
+    Route::get('logs/show/{id}', [
+        'uses' => 'Admin\AdminController@showLog',
+        'as' => 'logs.show'
+    ]);
+    Route::put('logs/update/{id}', [
+        'uses' => 'Admin\AdminController@updateLog',
+        'as' => 'logs.update'
+    ]);
+
     Route::get('configs', [
         'uses' => 'Admin\AdminController@showConfigs',
         'as' => 'configs.show'
