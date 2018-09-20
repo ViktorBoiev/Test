@@ -26,4 +26,5 @@ class BaseConfig extends Model
     const MIN_MONEY_WIN = 'min money win';
     const MAX_MONEY_WIN = 'max money win';
     const MONEY_WIN_LIMIT = 'money win limit';
+    const CONVERSION_RATIO = 'conversion ratio';
 }

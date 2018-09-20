@@ -16,14 +16,13 @@ class CreateWinnerLogsTable extends Migration
         Schema::create('winner_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('winner_id');
-            $table->unsignedInteger('gift_id');
+            $table->string('gift_type')->nullable();
             $table->string('win_type');
             $table->integer('win_quantity')->default(1);
             $table->unsignedInteger('status')->nullable();
             $table->timestamps();
 
             $table->foreign('winner_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('gift_id')->references('id')->on('gifts')->onDelete('cascade');
         });
     }
 

@@ -7,16 +7,56 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+$(document).ready(function() {
+    $(document).on('click', '.lottery-button',function(e) {
+        e.preventDefault();
+        $('#body-preloader').css('display', 'flex');
+        $.ajax({
+            type: 'POST',
+            url: '/lottery/prize',
+            error: function() {
+                $('.lottery-heading').text('Something went wrong! Please reload a page and try once more');
+            },
+            success: function(result) {
+                var modalBody = $('#lottery-modal').find('.modal-body');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+                $(modalBody).html('<h3>Your prize is ' +
+                    (result.win_quantity === 1) ? '' : '<b>' + win_quantity + '</b> ' +
+                    result.win_type + '</h3>');
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+                if(result.gift_type) {
+                    $('.convert').removeClass('hidden')
+                }
+                $('#lottery-modal').modal('show');
+            }
+        }).done(function () {
+            $('#body-preloader').css('display', 'none');
+        });
+    });
+    $(document).on('click', '.lottery-button',function(e) {
+        e.preventDefault();
+        $('#body-preloader').css('display', 'flex');
+        $.ajax({
+            type: 'POST',
+            url: '/lottery/prize',
+            error: function() {
+                $('.lottery-heading').text('Something went wrong! Please reload a page and try once more');
+            },
+            success: function(result) {
+                var modalBody = $('#lottery-modal').find('.modal-body');
 
-const app = new Vue({
-    el: '#app'
+                $(modalBody).html('<h3>Your prize is ' +
+                (result.win_quantity === 1) ? '' : '<b>' + win_quantity + '</b> ' +
+                    result.win_type + '</h3>');
+
+                if(result.gift_type) {
+                    $('.convert').removeClass('hidden')
+                }
+                $('#lottery-modal').modal('show');
+            }
+        }).done(function () {
+            $('#body-preloader').css('display', 'none');
+        });
+    });
+
 });

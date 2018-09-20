@@ -7,6 +7,7 @@ use App\Models\WinnerLog;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
  * App\User
@@ -33,10 +34,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @mixin \Eloquent
  * @property-read \App\Models\UserPreferences $preferences
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WinnerLog[] $winnerLogs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User withRole($role)
  */
 class User extends Authenticatable
 {
     use Notifiable;
+    use EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.

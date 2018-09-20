@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $win_type
  * @property int $win_quantity
  * @property int|null $status
- * @property int $gift_id
+ * @property string|null $gift_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WinnerLog whereCreatedAt($value)
@@ -24,9 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WinnerLog whereWinType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WinnerLog whereWinnerId($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Gift[] $gift
  * @property-read \App\User $winner
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WinnerLog whereGiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WinnerLog whereGiftType($value)
  */
 class WinnerLog extends Model
 {
@@ -34,20 +33,17 @@ class WinnerLog extends Model
     const TYPE_LOYALTY = 'loyalty points';
     const TYPE_GIFT = 'gift';
 
-    const STATUS_DECLINED = 0;
-    const STATUS_ACCEPTED = 1;
-    const STATUS_PREPARING = 2;
-    const STATUS_SENT = 3;
-    const STATUS_RECEIVED = 4;
+    const STATUS_PENDING = 0;
+    const STATUS_DECLINED = 1;
+    const STATUS_ACCEPTED = 2;
+    const STATUS_PREPARING = 3;
+    const STATUS_SENT = 4;
+    const STATUS_RECEIVED = 5;
+    const STATUS_CONVERTED_TO_LOYALTY = 6;
 
     public function winner()
     {
         return $this->belongsTo(User::class, 'winner_id');
-    }
-
-    public function gift()
-    {
-        return $this->hasMany(Gift::class);
     }
 
 }

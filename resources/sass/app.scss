@@ -8,7 +8,84 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@mixin dasharray($radius) {
+  stroke-dasharray: 2 * 3.14 * $radius;
+}
+
+@mixin dashoffset($radius, $offset) {
+  stroke-dashoffset: 2 * 3.14 * $radius - $offset;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.home {
+  .card-footer {
+    text-align: right;
+  }
+}
+
+.lottery-block {
+  position: relative;
+  .btn-big {
+    padding: 25px;
+    font-size: 4rem;
+    display: block;
+  }
+}
+
+.preloader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.7);
+  display: none;
+}
+
+@keyframes rotate {
+  100% { transform: rotate3d(0,0,1,360deg); }
+}
+
+svg {
+  transform: rotate3d(0,0,1,-90deg);
+
+  circle {
+    fill: none;
+    stroke: #444;
+    stroke-width: 2px;
+    will-change: transform;
+    transform-origin: center center;
+    animation-name: rotate;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .inner {
+    stroke: lightgreen;
+    @include dasharray(32);
+    @include dashoffset(32, 40);
+    animation-delay: 200ms;
+    animation-duration: 1s;
+  }
+
+  .middle {
+    stroke: yellow;
+    @include dasharray(38);
+    @include dashoffset(38, 60);
+    animation-delay: 100ms;
+    animation-duration: 1.5s;
+  }
+
+  .outer {
+    stroke: red;
+    @include dasharray(44);
+    @include dashoffset(44, 100);
+    animation-delay: 300ms;
+    animation-duration: 2s;
+  }
 }

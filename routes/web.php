@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('lottery', [
+        'uses' => 'HomeController@lottery',
+        'as' => 'lottery'
+    ]);
+
+    Route::post('lottery/prize', [
+        'uses' => 'HomeController@prize',
+        'as' => 'prize.generate',
+    ]);
+});
